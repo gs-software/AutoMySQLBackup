@@ -529,7 +529,7 @@ parse_configuration () {
 	# OPT string for use with mysqlstatus
 	opt_dbstatus=( '--status' )
 
-	if [ "$NODOT_VER" -ge 56 ]; then
+	if [[ "$NODOT_VER" -ge 56 ]]; then
 		[[ "${CONFIG_mysql_dump_usessl}" = "yes" ]] 		&& {
 		  opt=( "${opt[@]}" '--ssl-mode=REQUIRED' )
 		  mysql_opt=( "${mysql_opt[@]}" '--ssl-mode=REQUIRED' )
@@ -954,7 +954,7 @@ process_dbs() {
 		esac
 		return 0;
 	  else
-        if [ $NODOT_VER = "57" ]; then
+        if [[ $NODOT_VER = "57" ]]; then
           max_execution_time=`$MYSQL -B --skip-column-names -e "show variables like '%max_execution_time%';" | awk '{print $2}'`
           max_statement_time=`$MYSQL -B --skip-column-names -e "show variables like '%max_statement_time%';" | awk '{print $2}'`
           $MYSQL -e "SET GLOBAL max_statement_time=0;"
@@ -982,7 +982,7 @@ process_dbs() {
 		  ret=$?
 		  ;;
 		esac
-        if [ $NODOT_VER = "57" ]; then
+        if [[ $NODOT_VER = "57" ]]; then
 		  $MYSQL -e "SET GLOBAL max_execution_time=$max_execution_time;"
 		  $MYSQL -e "SET GLOBAL max_statement_time=$max_statement_time;"
         fi
